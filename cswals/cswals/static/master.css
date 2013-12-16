@@ -1,0 +1,88 @@
+body{
+    text-align:left;
+}
+
+li{
+    list-style:disc inside;
+}
+
+.leftpane{
+    width: 300px;  
+    position: absolute;
+    left: 10px;
+    top: 200px;   
+}
+
+.leftpane thead{
+    font-weight: bold;
+}
+
+.leftpane thead td{
+    padding: 2px;
+}
+
+.featurelist{
+     height: 400px; 
+     overflow-y: scroll; 
+}
+     
+.featuretable{
+     height: 400px; 
+     overflow-y: scroll; 
+}
+
+.featuretable tr:nth-child(2n){
+    background:#aCaCa9;
+}
+ 
+ 
+.valuetable tr:nth-child(2n){
+    background:#aCaCa9;
+}
+ 
+.rightpane{ 
+    padding: 10px;
+    position: absolute;
+    left: 300px;
+    top: 200px;
+}
+
+
+
+#mapspace{
+    background-color: red;
+    padding: 10px;
+    position: absolute;
+    left: 400px;
+    top: 200px;
+    width: 1000px;
+}
+
+.large{
+    font-size: 120%;
+    font-weight: bold;
+}
+
+.small{
+    font-size: 80%;
+}
+
+.center{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.mathtable td{
+    border: 2px inset black;
+    padding: 2px;
+}
+
+/*.walslink:before {
+    content:url(http://wals.info/static/wals/images/favicon.png); }
+}*/
+
+.collectionlist{
+    height:600px;
+    overflow-y:scroll; 
+    background:white;
+}

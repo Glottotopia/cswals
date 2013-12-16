@@ -1,0 +1,271 @@
+<!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+lang="en">
+<!--   <xi:include href="../master.xhtml" /> -->
+  <head />
+  <body>
+    <div id="text">
+      <p>You can add your dataset to the database here. Please choose one of the options below</p>
+      <ul>
+        <li><a href="#ethercalc"> add data from an Ethercalc Spreadsheet</a>. Please copy and paste the key from the Ethercalc Spreadsheet below</li>
+        <li><a href="#googledocs"> add data from a GoogleDoc Spreadsheet</a>. Please copy and paste the key from the Google Spreadsheet below</li>
+        <li><a href="#officespreadsheet"> upload a Microsoft Excel *.xls file</a> (*.xslx is not supported) or <a href="#officespreadsheet">a comma-separated value (*.csv)</a> or <a href="#officespreadsheet">tab-separated value (*.tsv) file</a></li>
+      </ul>
+      <p>All spreadsheets should have the following structure</p>
+      <table class="mathtable">
+        <tr style="font-weight:bold">
+          <td>walscode</td>
+          <td>fA1</td>
+          <td>fB1</td>
+          <td>fB2</td>
+          <td>...</td>
+          <td>glottologref</td>
+          <td>ISBN</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>abc</td>
+          <td>&#160;</td>
+          <td>2</td>
+          <td>&#160;</td>
+          <td>...</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>def</td>
+          <td>1</td>
+          <td>&#160;</td>
+          <td>3</td>
+          <td>...</td>
+          <td>123456</td>
+          <td>&nbsp;</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>ghi</td>
+          <td>&#160;</td>
+          <td>1</td>
+          <td>3</td>
+          <td>...</td>
+          <td>&#160;</td>
+          <td>0521393302</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>jkl</td>
+          <td>4</td>
+          <td>&#160;</td>
+          <td>&#160;</td> 
+          <td>...</td>
+          <td>&#160;</td>
+          <td>&#160;</td>
+          <td>...</td>
+        </tr>
+        <tr>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+          <td>...</td>
+        </tr>
+      </table>
+
+      <ul>
+	<li> one column must be named 'walscode' </li>
+	<li> feature columns preferably start with 'f' </li>
+	<li> it is possible to add the columns 'isbn'  and <a href="http://glottolog.org/resource/reference/id/123456">'glottologref'</a> to give references </li>
+	</ul> 
+      <hr />
+    </div>
+    <div id="datasource">
+      <div id="ethercalc">
+        <form action="action/getethercalc">
+          <p>Ethercalc ID</p>
+          <p>(e.g. 
+          <span class="small">https://ethercalc.org/ 
+          <span class="large">SriLankaWals</span></span>)</p>
+          <textarea cols="50" rows="1" name="key"></textarea>
+          <textarea cols="28" rows="1" name="creator" onfocus="if(this.value=='creator(s) name'){this.value=''}">creator(s) name</textarea>
+          <input type="submit" value="fetch data from Ethercalc" />
+        </form>
+	  <p>
+	   Create new Ethercalc spreadsheet for dataset <textarea name="ethercalc"> mydataset</textarea> <button onclick="window.open('www.ethercalc.org/'+ethercalc.value)"> Create </button>
+	    </p>
+      </div>
+      <hr />
+     
+      <div id="googledocs">
+        <form action="action/getgoogledoc">
+          <p>GoogleDoc ID</p>
+          <p>( e.g. 
+          <span class="small">https://docs.google.com/spreadsheet/ccc?key= 
+          <span class="large">0Apb_EoY8u4imdDFXMDJDdUNGLXZCNVp4aEtpZnpnYlE</span>#gid=0</span>)</p>
+          <textarea cols="50" rows="1" name="key"></textarea>
+          <input type="submit" value="fetch data from GoogleDoc" />
+        </form>
+      </div>
+      <hr />
+       <div id="officespreadsheet">
+        <form action="/action/getofficespreadsheet" method="post" enctype="multipart/form-data">
+          <p>Upload Spreadsheet 
+          <br />(xls, csv, tsv, ods) 
+          <br />
+          <input name="spreadsheet" type="file" size="50" />
+          <textarea cols="28" rows="1" name="creator" onfocus="if(this.value=='creator(s) name'){this.value=''}">creator(s) name</textarea>
+<!--           <textarea cols="28" rows="1" name="dataset" onfocus="if(this.value=='dataset name'){this.value=''}">dataset name</textarea> -->
+          <input type="submit" value="upload spreadsheet" /></p>
+        </form>
+      </div>
+      <hr />
+      <!--      <div>
+        <table>
+          <tr>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+            <td>
+              <textarea cols="6" rows="1"></textarea>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <button type="button">submit table</button> -->
+    </div>
+  </body>
+</html>

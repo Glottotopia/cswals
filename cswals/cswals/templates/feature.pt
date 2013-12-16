@@ -1,0 +1,128 @@
+<!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:tal="http://xml.zope.org/namespaces/tal" lang="en">
+<head>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/static/master.css" />  
+    
+    <script>
+
+function initialize(valuearray) {
+    var myLatlng = new google.maps.LatLng(30.363882,112.044922); 
+
+    var mapOptions = {
+	zoom: 2,
+	center: myLatlng,
+	mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+   
+//     var acceptedvalues = document.getElementById('initialdatasets').value; 
+    var acceptedvalues = '' 
+    xvs = document.getElementsByName('dataset')
+    for (var e in xvs){  
+	if (xvs[e].checked==true){ 
+	    acceptedvalues = acceptedvalues + xvs[e].value 
+	}
+    } 
+
+    var values = document.getElementsByName('mapdatavalue');
+   
+    var markers = []  
+    for (var v in values){
+	s = values[v].value 
+	try{
+	    a = values[v].value.split('---')
+	}
+	catch (e){ 
+	    continue
+	}
+	latitude = a[0]
+	longitude = a[1]
+	namestring = a[2]
+	valuestring = a[3].trim()
+	descriptionstring = a[4]
+	iconstring = a[5] 
+	creator = a[6]  
+	dataset = a[7]   
+	if (acceptedvalues.indexOf(dataset)!=-1){ 
+	    var m = new google.maps.Marker({
+		position: new google.maps.LatLng(latitude,longitude),
+		map: map,
+		title: namestring+'\n'+valuestring + '(' + descriptionstring + ')\n' + 'provided by: ' + creator + '(' +dataset+ ')', 
+		icon: '/static/images/icons/'+iconstring 
+	    }); 
+	    markers.push(m)
+	}
+    }        
+}
+ 
+    google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    
+
+</head>
+  <body>
+    <div>
+	<input type="hidden" id="initialdatasets" tal:attributes="value ' '.join(datasets)" />
+	<div tal:repeat="md mapdata">   
+
+<input   type="hidden"  name="mapdatavalue" tal:attributes="value '%(latitude)s---%(longitude)s---%(name)s (%(walscode)s)--- %(featurevalue)s --- %(description)s---%(imgurl)s---%(creator)s---%(dataset)s'%md" />
+	</div>
+    <div id="content">
+
+      <h1>Feature ${featurename}: ${featurestring} </h1>
+	<h2><a class="walslink" tal:attributes="href 'http://wals.info/feature/%s'%featurename" target="_blank"> view WALS page</a></h2>  
+
+
+	    <div class="leftpane">
+      <div class="valuelist">
+	<table class="valuetable">
+	    <thead>
+		<tr>
+		<td>value</td>
+		<td>description</td>
+		<td>WALS</td>
+		<td>crowd</td>
+		</tr>
+	    </thead>
+	    <tr tal:repeat="v values">
+		<td>${v['featurevalue']}</td>
+		<td>${v['longdescription']}</td>
+		<td><img src="/static/images/icons/w${v['colorstring']}.png"></img></td>
+		<td><img src="/static/images/icons//p${v['colorstring']}.png"></img></td>
+	    </tr>
+	</table> 
+	</div>
+	<div class="featurelist">
+	<table class="featuretable">
+	<thead>
+	    <tr>
+	    <td>walscode</td>
+	    <td>value</td>
+	    <td>creator</td>
+	    </tr>
+	</thead>
+        <tr tal:repeat="lg languages">
+          <td><a href="/language/walscode/${lg[0]}">${lg[0]}</a></td>
+          <td><span title="${lg[3]}">${lg[1]}</span></td>
+          <td>${lg[2]}</td>
+        </tr>
+      </table>
+      </div>
+      </div>
+	<div>
+      <div id="mapspace">
+<!-- 	<div  py:if="len(c.datasets)!=1"> -->
+	<div>
+	<input type="checkbox" name="dataset" checked="checked" tal:repeat="ds datasets" value="${ds}" onClick="initialize();"> ${ds}</input> 
+<!-- 	<button id="redraw" "> redraw </button> -->
+	</div>
+	<div id="map-canvas" style="height:500px;"></div>
+     
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

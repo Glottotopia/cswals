@@ -1,0 +1,24 @@
+<!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:tal="http://xml.zope.org/namespaces/tal"
+>
+
+  <head />
+  <body>
+    <div>
+	<p> Your upload status: You uploaded the following values:</p>
+    </div>
+    <div>
+	<table>
+	    <tr tal:repeat="t  uploadedvalues"><td>${t[0]}</td><td>${t[1]}</td><td>${t[2]}</td></tr>
+	</table>
+    </div>   
+    <p>
+    <a tal:attributes="href '/datasets/%s'%rdffile" onclick="alert('You are downloading a zip archive with all your datapoints and an overview file. If you want to make your data available via Dropbox, please edit line 10 of the overview file');"> download your dataset as rdf </a>    
+    </p>
+    <p>
+    <a href="http://cyberling.org/node/996"> technical instructions and background </a>
+    </p>
+  </body>
+</html>
