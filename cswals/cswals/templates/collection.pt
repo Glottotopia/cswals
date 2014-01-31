@@ -1,12 +1,14 @@
 <!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:py="http://genshi.edgewall.org/"
-xmlns:xi="http://www.w3.org/2001/XInclude" lang="en">
-  <xi:include href="../master.xhtml" />
-  <head />
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:tal="http://xml.zope.org/namespaces/tal" 
+xmlns:metal="http://xml.zope.org/namespaces/metal">
+
+<head metal:use-macro="main.macros['head']" />
   <body>
-    <div id="content">
+    <div metal:use-macro="main.macros['header']" />
+    <div metal:use-macro="main.macros['body']">
+      <div metal:fill-slot="content" id="content">
       <table>
         <tr>
           <td>Features</td>
@@ -17,28 +19,35 @@ xmlns:xi="http://www.w3.org/2001/XInclude" lang="en">
           <td>
 	    <div class="collectionlist">
             <ul>
-              <li py:for="fn in c.features">
-              <a href="/feature/id/${fn['featurename']}">${fn['featurename']}</a>: ${fn['featurestring']}</li>
+		<li tal:repeat="fn features"> 
+		    <a href="/feature/id/${fn['featurename']}">
+			${fn['featurename']}
+		    </a>: 
+		    ${fn['featurestring']}
+		</li>
             </ul>
 	    </div>
           </td>
           <td>
 	    <div class="collectionlist">
             <ul>
-              <li py:for="lg in c.languages">
-              <a href="/language/id/${lg['walscode']}">${lg['walscode']}</a>: ${lg['name']}</li>
+		<li tal:repeat="lg languages">
+              <a href="/language/walscode/${lg['walscode']}">${lg['walscode']}</a>: ${lg['name']}</li>
             </ul>
 	    </div>
           </td>
           <td>
 	    <div class="collectionlist">
-            <ul>
-              <li py:for="creator in c.creators"> ${creator['name']}: ${creator['count']}</li>
+            <ul> 
+		<li tal:repeat="creator creators"> 
+		${creator['name']}: ${creator['count']}</li>
             </ul>
 	    </div>
           </td>
         </tr>
       </table>
     </div>
+    </div>
+    <div metal:use-macro="main.macros['footer']" />
   </body>
 </html>

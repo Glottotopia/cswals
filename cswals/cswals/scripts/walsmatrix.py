@@ -234,7 +234,7 @@ class WalsMatrix:
 		    
     def dumpRDF(self):
 	fn = '%s.zip' % time.strftime("cswals%Y%b%d_%Hh%M_%S", time.gmtime())
-	zipfilename = './cswals/public/datasets/%s' % fn
+	zipfilename = './cswals/static/datasets/%s' % fn
 	a = []
 	zf = zipfile.ZipFile(zipfilename, mode='w')
 	for walscode in self.dictionary:

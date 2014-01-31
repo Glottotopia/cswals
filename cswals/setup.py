@@ -19,7 +19,7 @@ requires = [
     'waitress',
     'gdata',
     'xlrd',
-    'urllib2'
+    #'urllib2'
     ]
 
 setup(name='cswals',

@@ -5,14 +5,14 @@ import pprint
 
 ##SQLALCHEMY
 from sqlalchemy import create_engine
-#from sqlalchemy.sql import *
+from sqlalchemy.sql import func
 #from sqlalchemy.sql.expression import desc
 #from sqlalchemy.orm import aliased
 #from sqlalchemy import or_
 #from sqlalchemy import not_
 
  
-#from sqlalchemy.orm             import scoped_session, sessionmaker 
+#from sqlalchemy.orm  import scoped_session, sessionmaker 
 #from operator import itemgetter, attrgetter
 
 #from pylons import config
@@ -64,13 +64,17 @@ def getValues(featurename):
     
     return [x.__dict__.update({'colorcode':h.getColorstring(x.featurevalue)}) for x in result]
     
-def getLanguageInfo(walscode): 
+def getLanguageInfo(walscode):  
     result = DBSession.query(Languages)\
 			.filter(Languages.walscode==walscode)\
-			.all() 
-    d = result[0].__dict__
-    del d['_sa_instance_state']
-    return d
+			.all()    
+    try:
+	d = result[0].__dict__
+	del d['_sa_instance_state']
+	return d  
+    except IndexError:
+	return None
+    
     
 def getWalsFeatures():
     """return a dictionary of walsfeatures with an array of accepted values per feature"""
@@ -131,29 +135,26 @@ def getMapData(featurename):
 			.filter(Values.featurevalue==Featurevalues.featurevalue)\
 			.filter(Languages.walscode==Featurevalues.walscode)\
 			.all()  
-    r =  [x.__dict__ for x in result]
-    print 20*'='
-    pprint.pprint(r)
-    print 20*'='
+    r =  [x.__dict__ for x in result] 
     for s in r: 
 	imgurl = h.getImgUrl(s['featurevalue'], s['creator']) 
 	s['imgurl'] = imgurl 
     return r
     
-#def getAllLanguages():
-    #result = DBSession1.query(Languages)\
-	    #.all()
-    #return [x.__dict__ for x in result ]
+def getAllLanguages():
+    result = DBSession.query(Languages)\
+	    .all()
+    return [x.__dict__ for x in result ]
     
-#def getAllFeatures():
-    #result = DBSession1.query(Features)\
-	    #.all()
-    #return [x.__dict__ for x in result ]
+def getAllFeatures():
+    result = DBSession.query(Features)\
+	    .all()
+    return [x.__dict__ for x in result ]
     
 
     
-#def getCreatorStats():
-    #result = DBSession1.query(Featurevalues.creator,func.count(Featurevalues.creator))\
-			#.group_by(Featurevalues.creator)\
-			#.all()
-    #return [{'name':x[0],'count':x[1]} for x in result ] 
+def getCreatorStats():
+    result = DBSession.query(Featurevalues.creator,func.count(Featurevalues.creator))\
+			.group_by(Featurevalues.creator)\
+			.all()
+    return [{'name':x[0],'count':x[1]} for x in result ] 

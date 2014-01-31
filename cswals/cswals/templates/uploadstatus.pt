@@ -1,24 +1,30 @@
 <!DOCTYPE xhtml PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:tal="http://xml.zope.org/namespaces/tal"
->
-
-  <head />
+<html xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:tal="http://xml.zope.org/namespaces/tal" 
+xmlns:metal="http://xml.zope.org/namespaces/metal">
+  <head metal:use-macro="main.macros['head']" />
   <body>
-    <div>
-	<p> Your upload status: You uploaded the following values:</p>
+    <div metal:use-macro="main.macros['header']" />
+    <div metal:use-macro="main.macros['body']">
+	<div metal:fill-slot="content" id="content">
+	 <h1> upload status</h1>
+        <div>
+		<p> Your upload status: You uploaded the following values:</p>
+	    </div>
+	    <div>
+		<table>
+		    <tr tal:repeat="t  uploadedvalues"><td>${t[0]}</td><td>${t[1]}</td><td>${t[2]}</td></tr>
+		</table>
+	    </div>   
+	    <p>
+		<a tal:attributes="href '/static/datasets/%s'%rdffile" onclick="alert('You are downloading a zip archive with all your datapoints and an overview file. If you want to make your data available via Dropbox, please edit line 10 of the overview file');"> download your dataset as rdf </a>    
+	    </p>
+	    <p>
+		<a href="http://cyberling.org/node/996"> technical instructions and background </a>
+	    </p> 
+	</div>
     </div>
-    <div>
-	<table>
-	    <tr tal:repeat="t  uploadedvalues"><td>${t[0]}</td><td>${t[1]}</td><td>${t[2]}</td></tr>
-	</table>
-    </div>   
-    <p>
-    <a tal:attributes="href '/datasets/%s'%rdffile" onclick="alert('You are downloading a zip archive with all your datapoints and an overview file. If you want to make your data available via Dropbox, please edit line 10 of the overview file');"> download your dataset as rdf </a>    
-    </p>
-    <p>
-    <a href="http://cyberling.org/node/996"> technical instructions and background </a>
-    </p>
+    <div metal:use-macro="main.macros['footer']" />
   </body>
 </html>
