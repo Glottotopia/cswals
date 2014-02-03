@@ -18,18 +18,15 @@ from scripts import walsmatrix
 from scripts import helpers as h
 
 
-
- 
-
 @view_config(route_name='welcome', renderer='templates/welcome.pt') 
 def welcome(request): 
     main = get_renderer('templates/master.pt').implementation() 
-    return {'project': 'cswals','main':main}
+    return {'project': 'cswals','main':main, 'h':h}
 
 @view_config(route_name='upload', renderer='templates/upload.pt') 
 def upload(request): 
     main = get_renderer('templates/master.pt').implementation()     
-    return {'project': 'cswals','main':main}
+    return {'project': 'cswals','main':main, 'h':h}
     
     
 @view_config(route_name='collection', renderer='templates/collection.pt') 
@@ -38,7 +35,7 @@ def collection(self):
     languages = getAllLanguages()
     features = getAllFeatures()
     creators = getCreatorStats() 
-    return {'project': 'cswals','main':main,
+    return {'project': 'cswals','main':main, 'h':h,
 	'languages':languages,
 	'features':features,
 	'creators':creators
@@ -53,7 +50,7 @@ def showlanguage(request):
     languageinfo = getLanguageInfo(walscode)
     if languageinfo == None:
 	raise HTTPNotFound()  
-    return {'main':main,
+    return {'main':main, 'h':h,
 	'project': 'cswals',
 	'walscode':walscode,
 	'features':features,
@@ -66,7 +63,7 @@ def showfeature(request):
     ID = request.matchdict.get('ID','' ) 
     mapdata = getMapData(ID) 
     datasets = list(set([x['dataset'] for x in mapdata if x['dataset']!=None])) 
-    return {'main':main,
+    return {'main':main, 'h':h,
 	'project': 'cswals',
 	'featurename':ID,
 	'featurestring':getFeatureString(ID),
@@ -87,7 +84,7 @@ def getGoogleDoc(request):
     wm.fromGoogleDoc(key) 
     uploadedvalues = h.flattenValues(wm.dictionary)
     rdffile = wm.rdffile 
-    return {'project': 'cswals','main':main,
+    return {'project': 'cswals','main':main, 'h':h,
 	'uploadedvalues':uploadedvalues,
 	'rdffile':rdffile 
     }  
@@ -101,7 +98,7 @@ def getEthercalc(request):
     wm.fromEthercalc(key,creator) 
     uploadedvalues = h.flattenValues(wm.dictionary)
     rdffile = wm.rdffile
-    return {'project': 'cswals','main':main,
+    return {'project': 'cswals','main':main, 'h':h,
 	'uploadedvalues':uploadedvalues,
 	'rdffile':rdffile 
     }  

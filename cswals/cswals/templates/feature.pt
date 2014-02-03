@@ -48,7 +48,7 @@ function initialize(valuearray) {
 		position: new google.maps.LatLng(latitude,longitude),
 		map: map,
 		title: namestring+'\n'+valuestring + '(' + descriptionstring + ')\n' + 'provided by: ' + creator + '(' +dataset+ ')', 
-		icon: '/static/images/icons/'+iconstring 
+		icon: '/cswals/static/images/icons/'+iconstring 
 	    }); 
 	    markers.push(m)
 	}
@@ -97,11 +97,11 @@ function initialize(valuearray) {
 		    <tr tal:repeat="v values">
 			<td>${v['featurevalue']}</td>
 			<td>${v['longdescription']}</td>
-			<td>
-			<img src="/static/images/icons/w${v['colorstring']}.png"></img>
+			<td> 
+			<img  tal:attributes='src python:h.url("static/images/icons/w%s.png" % v["colorstring"])' />
 			</td>
 			<td>
-			<img src="/static/images/icons//p${v['colorstring']}.png"></img>
+			<img  tal:attributes='src python:h.url("static/images/icons/p%s.png" % v["colorstring"])' />
 			</td>
 		    </tr>
 		    </table>
@@ -117,7 +117,8 @@ function initialize(valuearray) {
 		    </thead>
 		    <tr tal:repeat="lg languages">
 			<td>
-			<a href="/language/walscode/${lg[0]}">${lg[0]}</a>
+			<a  tal:attributes='href python:h.url("language/walscode/%s" % lg[0])'>
+${lg[0]}</a>
 			</td>
 			<td>
 			<span title="${lg[3]}">${lg[1]}</span>

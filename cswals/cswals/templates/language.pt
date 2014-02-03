@@ -24,8 +24,9 @@ xmlns:metal="http://xml.zope.org/namespaces/metal">
                 </tr>
               </thead>
               <tr tal:repeat="f features">
-                <td>
-                  <a href="/feature/id/${f[0]}">${f[0]}</a>
+                <td> 
+		    <a  tal:attributes='href python:h.url("feature/id/%s" % f[0])'> 
+		    ${f[0]}</a>
                 </td>
                 <td>${f[1]}</td>
                 <td>${f[2]}</td>

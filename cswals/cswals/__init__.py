@@ -15,7 +15,7 @@ def main(global_config, **settings):
     Base.metadata.bind = engine
     config = Configurator(settings=settings)
     config.include('pyramid_chameleon')
-    config.add_static_view('static', 'static', cache_max_age=3600)
+    config.add_static_view('static', 'cswals:static', cache_max_age=3600)
     config.add_route('welcome', '/')
     #config.add_route('contact', '/contact')
     config.add_route('upload', '/upload')

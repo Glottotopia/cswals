@@ -17,18 +17,21 @@
     <![endif]--> 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
     <script metal:define-slot="localscript"></script>
-    <link rel="stylesheet" href="/cswals/static/bootstrap.min.css"/>
-    <link rel="stylesheet" href="/cswals/static/blog.css"/> 
-    <link rel="stylesheet" type="text/css" media="screen" href="/cswals/static/master.css" />
+    <link rel="stylesheet" type="text/css" tal:attributes="href python:h.url('static/bootstrap.min.css')"/>
+    <link rel="stylesheet" type="text/css" tal:attributes="href python:h.url('static/blog.css')"/> 
+    <link rel="stylesheet" type="text/css" tal:attributes="href python:h.url('static/master.css')" />
   </head>
   <div metal:define-macro="header">
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="/cswals">Home</a>
-          <a class="blog-nav-item" href="/cswals/collection">Collection</a>
-          <a class="blog-nav-item" href="/cswals/upload">Upload</a>
-          <a class="blog-nav-item" href="#">About</a>
+          <a class="blog-nav-item active" href="/cswals">
+ <p tal:attributes="title python:h.url('123')">
+</a>
+          <a class="blog-nav-item" tal:attributes="href python:h.url('')">Home</a>
+          <a class="blog-nav-item" tal:attributes="href python:h.url('collection')">Collection</a>
+          <a class="blog-nav-item" tal:attributes="href python:h.url('upload')">Upload</a>
+          <a class="blog-nav-item" tal:attributes="href python:h.url('about')">About</a>
         </nav>
       </div>
     </div>

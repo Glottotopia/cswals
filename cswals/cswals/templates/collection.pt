@@ -20,7 +20,7 @@ xmlns:metal="http://xml.zope.org/namespaces/metal">
 	    <div class="collectionlist">
             <ul>
 		<li tal:repeat="fn features"> 
-		    <a href="/feature/id/${fn['featurename']}">
+		    <a  tal:attributes='href python:h.url("feature/id/%s" % fn["featurename"])'>
 			${fn['featurename']}
 		    </a>: 
 		    ${fn['featurestring']}
@@ -32,7 +32,8 @@ xmlns:metal="http://xml.zope.org/namespaces/metal">
 	    <div class="collectionlist">
             <ul>
 		<li tal:repeat="lg languages">
-              <a href="/language/walscode/${lg['walscode']}">${lg['walscode']}</a>: ${lg['name']}</li>
+		    <a  tal:attributes='href python:h.url("language/walscode/%s" % lg["walscode"])'>
+		    ${lg['walscode']}</a>: ${lg['name']}</li>
             </ul>
 	    </div>
           </td>

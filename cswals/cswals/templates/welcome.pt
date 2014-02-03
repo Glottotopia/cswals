@@ -14,7 +14,10 @@ xmlns:metal="http://xml.zope.org/namespaces/metal">
 		Welcome to Crowdsourcing WALS. This project aims at complementing the existing WALS database with additional data points collected by individual researchers (you?) 
 		</p>
 		<p class="welcomep">
-		    You can <a href="/collection"> browse the collection </a> or <a href="/upload">upload own data</a>
+		    You can <a  tal:attributes='href python:h.url("collection")'> 
+browse the collection </a> or 
+<a  tal:attributes='href python:h.url("upload")'> 
+upload own data</a>
 		</p>
 	    </div>
 	</div>

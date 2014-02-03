@@ -5,7 +5,7 @@ Consists of functions to typically be used within templates, but also
 available to Controllers. This module is available to templates as 'h'.
 """
 #from pylons import url as pylons_url
-#from pylons import config
+from pyramid import config
 #from random import *
 #import hashlib
 #import latex
@@ -23,27 +23,14 @@ linguiststopwords = ['one', 'two', 'three', 'found', 'such', 'attested', 'though
 stopwords += linguiststopwords
 STOPDIC = dict(zip(stopwords,[True for i in range(len(stopwords))]))
     
-def url(*args, **kwargs):
-    """
-    wrap pylons url object to make sure it returns full absolute URLs which
-    we want in particular for our LinkedData. 
-    """ 
-    _url = pylons_url(*args, **kwargs)
-    if not _url.startswith('http'):
-        _host = config['host']
-        _port = config['port']
-        _prefix = config['myprefix']
-        #_prefix = ''
-	#if _prefix == '':
-	    #prefix = '/'
-	if _url.startswith('%s/' % _prefix): #evil hack to undo stupid pylons_url behaviour
-	    _prefix = '' 
-        _url = "http://%s:%s%s%s" % (_host, _port, _prefix, _url) 
-	if str(_port) == '80':
-	    _url = "http://%s%s" % (_host, _url) 
-	else:
-	    _url = "http://%s:%s%s" % (_host, _port, _url) 
-    return _url
+def url(s):
+    #_prefix = config['myprefix']
+    _prefix = 'cswals'
+    host = 'www.glottotopia.org'
+    if _prefix == '':
+	return s
+    return 'http://%s/%s/%s' % (host,_prefix,s)
+    
 
 def getColorstring(value):   
     orientation = value/8
