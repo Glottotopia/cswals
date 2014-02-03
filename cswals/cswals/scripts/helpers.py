@@ -32,13 +32,13 @@ def url(*args, **kwargs):
     if not _url.startswith('http'):
         _host = config['host']
         _port = config['port']
-        #_prefix = config['myprefix']
-        _prefix = ''
+        _prefix = config['myprefix']
+        #_prefix = ''
 	#if _prefix == '':
 	    #prefix = '/'
-	#if _url.startswith('%s/' % _prefix): #evil hack to undo stupid pylons_url behaviour
-	    #_prefix = '' 
-        #_url = "http://%s:%s%s%s" % (_host, _port, _prefix, _url) 
+	if _url.startswith('%s/' % _prefix): #evil hack to undo stupid pylons_url behaviour
+	    _prefix = '' 
+        _url = "http://%s:%s%s%s" % (_host, _port, _prefix, _url) 
 	if str(_port) == '80':
 	    _url = "http://%s%s" % (_host, _url) 
 	else:

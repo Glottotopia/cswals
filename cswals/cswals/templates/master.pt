@@ -17,17 +17,17 @@
     <![endif]--> 
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
     <script metal:define-slot="localscript"></script>
-    <link href="/static/bootstrap.min.css" rel="stylesheet" />
-    <link href="/static/blog.css" rel="stylesheet" /> 
-    <link rel="stylesheet" type="text/css" media="screen" href="/static/master.css" />
+    <link rel="stylesheet" href="/cswals/static/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/cswals/static/blog.css"/> 
+    <link rel="stylesheet" type="text/css" media="screen" href="/cswals/static/master.css" />
   </head>
   <div metal:define-macro="header">
     <div class="blog-masthead">
       <div class="container">
         <nav class="blog-nav">
-          <a class="blog-nav-item active" href="/">Home</a>
-          <a class="blog-nav-item" href="/collection">Collection</a>
-          <a class="blog-nav-item" href="/upload">Upload</a>
+          <a class="blog-nav-item active" href="/cswals">Home</a>
+          <a class="blog-nav-item" href="/cswals/collection">Collection</a>
+          <a class="blog-nav-item" href="/cswals/upload">Upload</a>
           <a class="blog-nav-item" href="#">About</a>
         </nav>
       </div>
