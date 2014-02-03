@@ -1,5 +1,0 @@
-      [paste.app_factory]
-      main = cswals:main
-      [console_scripts]
-      initialize_cswals_db = cswals.scripts.initializedb:main
-      
